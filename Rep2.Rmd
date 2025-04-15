@@ -1,0 +1,22 @@
+---
+title: "R2"
+output: html_document
+date: "2025-04-14"
+---
+
+```{r setup, results='FALSE'}
+knitr::opts_chunk$set(echo = FALSE)
+install.packages("readxl")
+install.packages("systemfit")
+library(readxl)
+library(systemfit)
+mdf <- read_excel("shev_with_distance.xlsx")
+eq1 <- Share ~ export_variety
+eq2 <- export_variety ~ dist
+system_eq <- list(eq1 = eq1, eq2 = eq2)
+fit_3sls <- systemfit(system_eq, method = "3SLS", data = mdf)
+summary(fit_3sls)
+```
+
+
+
